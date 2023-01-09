@@ -1,15 +1,17 @@
+const rowA = [  0,  1,  2,  3,  4,  5,  6,  7,  8];  // Row A
+const rowB = [  9, 10, 11, 12, 13, 14, 15, 16, 17];  // Row B
+const rowC = [ 18, 19, 20, 21, 22, 23, 24, 25, 26];  // Row C
+const rowD = [ 27, 28, 29, 30, 31, 32, 33, 34, 35];  // Row D
+const rowE = [ 36, 37, 38, 39, 40, 41, 42, 43, 44];  // Row E
+const rowF = [ 45, 46, 47, 48, 49, 50, 51, 52, 53];  // Row F
+const rowG = [ 54, 55, 56, 57, 58, 59, 60, 61, 62];  // Row G
+const rowH = [ 63, 64, 65, 66, 67, 68, 69, 70, 71];  // Row H
+const rowI = [ 72, 73, 74, 75, 76, 77, 78, 79, 80];  // Row I
+
+
 class SudokuSolver {
 
  /*
-  CHAR 00 - 08 : RA (ROW1)
-  CHAR 09 - 17 : RB (ROW2)
-  CHAR 18 - 26 : RC (ROW3)
-  CHAR 27 - 35 : RD (ROW4)
-  CHAR 36 - 44 : RE (ROW5)
-  CHAR 45 - 53 : RF (ROW6)
-  CHAR 54 - 62 : RG (ROW7)
-  CHAR 63 - 71 : RH (ROW8)
-  CHAR 72 - 80 : RI (ROW9)
 
   CHAR 00, 09, 18, 27, 36, 45, 54, 63, 72 : C1 (COL1)
   CHAR 01, 10, 19, 28, 37, 46, 55, 64, 73 : C2 (COL2)
@@ -37,7 +39,7 @@ class SudokuSolver {
     return reg.test(puzzleString);
   }
 
-  checkRowPlacement(puzzleString, row, column, value) {
+  checkRowPlacement(puzzleString, row) {
     switch row {
       case 1:
         //
