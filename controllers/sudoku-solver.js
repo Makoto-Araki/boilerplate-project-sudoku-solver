@@ -88,15 +88,83 @@ class SudokuSolver {
   }
 
   checkColPlacement(puzzleString, column) {
-
+    switch (column) {
+      case 1:
+        this.checkPlacement(puzzleString, col1);
+        break;
+      case 2:
+        this.checkPlacement(puzzleString, col2);
+        break;
+      case 3:
+        this.checkPlacement(puzzleString, col3);
+        break;
+      case 4:
+        this.checkPlacement(puzzleString, col4);
+        break;
+      case 5:
+        this.checkPlacement(puzzleString, col5);
+        break;
+      case 6:
+        this.checkPlacement(puzzleString, col6);
+        break;
+      case 7:
+        this.checkPlacement(puzzleString, col7);
+        break;
+      case 8:
+        this.checkPlacement(puzzleString, col8);
+        break;
+      case 9:
+        this.checkPlacement(puzzleString, col9);
+        break;
+    }
   }
 
-  checkRegionPlacement(puzzleString, row, column, value) {
-
+  checkRegionPlacement(puzzleString, region) {
+    switch (region) {
+      case 1:
+        this.checkPlacement(puzzleString, reg1);
+        break;
+      case 2:
+        this.checkPlacement(puzzleString, reg2);
+        break;
+      case 3:
+        this.checkPlacement(puzzleString, reg3);
+        break;
+      case 4:
+        this.checkPlacement(puzzleString, reg4);
+        break;
+      case 5:
+        this.checkPlacement(puzzleString, reg5);
+        break;
+      case 6:
+        this.checkPlacement(puzzleString, reg6);
+        break;
+      case 7:
+        this.checkPlacement(puzzleString, reg7);
+        break;
+      case 8:
+        this.checkPlacement(puzzleString, reg8);
+        break;
+      case 9:
+        this.checkPlacement(puzzleString, reg9);
+        break;
+    }
   }
 
   solve(puzzleString) {
-    
+    if (!this.validate(puzzleString)) {
+      return new Error('puzzle could not be solved');
+    } else {
+
+      // Do not process more than the specified number of times to avoid infinite loops
+      for (let i = 0 i < 10; i++) {
+        for (let i = 0; i < puzzleString.length; i++) {
+          if () {}
+        }
+      }
+
+      return new Error('puzzle could not be solved');
+    }
   }
 }
 
