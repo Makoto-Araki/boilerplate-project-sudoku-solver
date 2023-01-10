@@ -180,7 +180,40 @@ class SudokuSolver {
     return false;
   }
 
+  // I added
+  searchRowPosition(num) {
+    for (let i = 0; i < rows.length; i++) {
+      if (num in rows[i]) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  // I added
+  searchColPosition(num) {
+    for (let i = 0; i < cols.length; i++) {
+      if (num in cols[i]) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  // I added
+  searchRegPosition(num) {
+    for (let i = 0; i < regs.length; i++) {
+      if (num in regs[i]) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  // Main Method for this class
   solve(puzzleString) {
+
+    // Check input string
     if (!this.validate(puzzleString)) {
       return new Error('puzzle could not be solved');
     } else {
@@ -192,25 +225,45 @@ class SudokuSolver {
         console.log(`Loop : ${i}`);
         console.log(`------------------------------`);
 
-        // Scan in puzzleString
+        // Scanning in puzzleString
         for (let j = 0; j < puzzleString.length; j++) {
 
           // For Debug
           console.log(`coordinate : ${coordinate[j]}`);
-          console.log(`characters : ${puzzleString[j]}`);
           
           if (puzzleString[j] !== '.') {
-            console.log('skipped');
             continue;
           } else {
-            for (let l = 1; l <= 9; l++) {
-              if (this.checkExistSameNumber(puzzleString[j], puzzleString[rows[k]])) {
-                console.log('existed');
-                break;
+
+            //　Check if which numbers are applicable
+            for (let k = 1; k <=9; k++) {
+
+              // For Debug
+              console.log(`Check if ${k} is applicable in ${coordinate[j]}`);
+
+              // Determining the search range
+              let tmp1 = this.searchRowPosition(j);
+              let tmp2 = this.searchColPosition(j);
+              let tmp3 = this.searchRegPosition(j);
+
+              // Error check
+              if (tmp1 === -1 || tmp2 === -1 || tmp3 === -1) {
+                return new Error('puzzle could not be solved');
+              }
+
+              // Basic check
+              if (this.checkExistSameNumber(puzzleString[j], puzzleString[rows[tmp1]]) ||
+                  this.checkExistSameNumber(puzzleString[j], puzzleString[cols[tmp2]]) ||
+                  this.checkExistSameNumber(puzzleString[j], puzzleString[regs[tmp3]])) {
+                continue;
               }
             }
+            
           }
         }
+        
+        // For Debug
+        console.log(`------------------------------`);
       }
 
       return new Error('puzzle could not be solved');
