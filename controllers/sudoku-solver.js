@@ -1,35 +1,54 @@
+// Correspondence between puzzleString and coordinate
+const coordinate = [
+  'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9',
+  'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9',
+  'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9',
+  'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9',
+  'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9',
+  'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9',
+  'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9',
+  'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9',
+  'I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I9',
+];
+
 // Correspondence between puzzleString and row
-const rowA = [  0,  1,  2,  3,  4,  5,  6,  7,  8];
-const rowB = [  9, 10, 11, 12, 13, 14, 15, 16, 17];
-const rowC = [ 18, 19, 20, 21, 22, 23, 24, 25, 26];
-const rowD = [ 27, 28, 29, 30, 31, 32, 33, 34, 35];
-const rowE = [ 36, 37, 38, 39, 40, 41, 42, 43, 44];
-const rowF = [ 45, 46, 47, 48, 49, 50, 51, 52, 53];
-const rowG = [ 54, 55, 56, 57, 58, 59, 60, 61, 62];
-const rowH = [ 63, 64, 65, 66, 67, 68, 69, 70, 71];
-const rowI = [ 72, 73, 74, 75, 76, 77, 78, 79, 80];
+const rows = [
+  [  0,  1,  2,  3,  4,  5,  6,  7,  8] ,
+  [  9, 10, 11, 12, 13, 14, 15, 16, 17] ,
+  [ 18, 19, 20, 21, 22, 23, 24, 25, 26] ,
+  [ 27, 28, 29, 30, 31, 32, 33, 34, 35] ,
+  [ 36, 37, 38, 39, 40, 41, 42, 43, 44] ,
+  [ 45, 46, 47, 48, 49, 50, 51, 52, 53] ,
+  [ 54, 55, 56, 57, 58, 59, 60, 61, 62] ,
+  [ 63, 64, 65, 66, 67, 68, 69, 70, 71] ,
+  [ 72, 73, 74, 75, 76, 77, 78, 79, 80] ,
+];
 
 // Correspondence between puzzleString and col
-const col1 = [  0,  9, 18, 27, 36, 45, 54, 63, 72];
-const col2 = [  1, 10, 19, 28, 37, 46, 55, 64, 73];
-const col3 = [  2, 11, 20, 29, 38, 47, 56, 65, 74];
-const col4 = [  3, 12, 21, 30, 39, 48, 57, 66, 75];
-const col5 = [  4, 13, 22, 31, 40, 49, 58, 67, 76];
-const col6 = [  5, 14, 23, 32, 41, 50, 59, 68, 77];
-const col7 = [  6, 15, 24, 33, 42, 51, 60, 69, 78];
-const col8 = [  7, 16, 25, 34, 43, 52, 61, 70, 79];
-const col9 = [  8, 17, 26, 35, 44, 53, 62, 71, 80];
+const cols = [
+  [  0,  9, 18, 27, 36, 45, 54, 63, 72] ,
+  [  1, 10, 19, 28, 37, 46, 55, 64, 73] ,
+  [  2, 11, 20, 29, 38, 47, 56, 65, 74] ,
+  [  3, 12, 21, 30, 39, 48, 57, 66, 75] ,
+  [  4, 13, 22, 31, 40, 49, 58, 67, 76] ,
+  [  5, 14, 23, 32, 41, 50, 59, 68, 77] ,
+  [  6, 15, 24, 33, 42, 51, 60, 69, 78] ,
+  [  7, 16, 25, 34, 43, 52, 61, 70, 79] ,
+  [  8, 17, 26, 35, 44, 53, 62, 71, 80] ,
+];
 
 // Correspondence between puzzleString and region
-const reg1 = [  0,  1,  2,  9, 10, 11, 18, 19, 20];
-const reg2 = [  3,  4,  5, 12, 13, 14, 21, 22, 23];
-const reg3 = [  6,  7,  8, 15, 16, 17, 24, 25, 26];
-const reg4 = [ 27, 28, 29, 36, 37, 38, 45, 46, 47];
-const reg5 = [ 30, 31, 32, 39, 40, 41, 48, 49, 50];
-const reg6 = [ 33, 34, 35, 42, 43, 44, 51, 52, 53];
-const reg7 = [ 54, 55, 56, 63, 64, 65, 72, 73, 74];
-const reg8 = [ 57, 58, 59, 66, 67, 68, 75, 76, 77];
-const reg9 = [ 60, 61, 62, 69, 70, 71, 78, 79, 80];
+const regs = [
+  [  0,  1,  2,  9, 10, 11, 18, 19, 20] ,
+  [  3,  4,  5, 12, 13, 14, 21, 22, 23] ,
+  [  6,  7,  8, 15, 16, 17, 24, 25, 26] ,
+  [ 27, 28, 29, 36, 37, 38, 45, 46, 47] ,
+  [ 30, 31, 32, 39, 40, 41, 48, 49, 50] ,
+  [ 33, 34, 35, 42, 43, 44, 51, 52, 53] ,
+  [ 54, 55, 56, 63, 64, 65, 72, 73, 74] ,
+  [ 57, 58, 59, 66, 67, 68, 75, 76, 77] ,
+  [ 60, 61, 62, 69, 70, 71, 78, 79, 80] ,
+];
 
 class SudokuSolver {
 
@@ -58,31 +77,31 @@ class SudokuSolver {
   checkRowPlacement(puzzleString, row) {
     switch (row) {
       case 1:
-        this.checkPlacement(puzzleString, rowA);
+        this.checkPlacement(puzzleString, rows[0]);
         break;
       case 2:
-        this.checkPlacement(puzzleString, rowB);
+        this.checkPlacement(puzzleString, rows[1]);
         break;
       case 3:
-        this.checkPlacement(puzzleString, rowC);
+        this.checkPlacement(puzzleString, rows[2]);
         break;
       case 4:
-        this.checkPlacement(puzzleString, rowD);
+        this.checkPlacement(puzzleString, rows[3]);
         break;
       case 5:
-        this.checkPlacement(puzzleString, rowE);
+        this.checkPlacement(puzzleString, rows[4]);
         break;
       case 6:
-        this.checkPlacement(puzzleString, rowF);
+        this.checkPlacement(puzzleString, rows[5]);
         break;
       case 7:
-        this.checkPlacement(puzzleString, rowG);
+        this.checkPlacement(puzzleString, rows[6]);
         break;
       case 8:
-        this.checkPlacement(puzzleString, rowH);
+        this.checkPlacement(puzzleString, rows[7]);
         break;
       case 9:
-        this.checkPlacement(puzzleString, rowI);
+        this.checkPlacement(puzzleString, rows[8]);
         break;
     }
   }
@@ -90,31 +109,31 @@ class SudokuSolver {
   checkColPlacement(puzzleString, column) {
     switch (column) {
       case 1:
-        this.checkPlacement(puzzleString, col1);
+        this.checkPlacement(puzzleString, cols[0]);
         break;
       case 2:
-        this.checkPlacement(puzzleString, col2);
+        this.checkPlacement(puzzleString, cols[1]);
         break;
       case 3:
-        this.checkPlacement(puzzleString, col3);
+        this.checkPlacement(puzzleString, cols[2]);
         break;
       case 4:
-        this.checkPlacement(puzzleString, col4);
+        this.checkPlacement(puzzleString, cols[3]);
         break;
       case 5:
-        this.checkPlacement(puzzleString, col5);
+        this.checkPlacement(puzzleString, cols[4]);
         break;
       case 6:
-        this.checkPlacement(puzzleString, col6);
+        this.checkPlacement(puzzleString, cols[5]);
         break;
       case 7:
-        this.checkPlacement(puzzleString, col7);
+        this.checkPlacement(puzzleString, cols[6]);
         break;
       case 8:
-        this.checkPlacement(puzzleString, col8);
+        this.checkPlacement(puzzleString, cols[7]);
         break;
       case 9:
-        this.checkPlacement(puzzleString, col9);
+        this.checkPlacement(puzzleString, cols[8]);
         break;
     }
   }
@@ -122,33 +141,43 @@ class SudokuSolver {
   checkRegionPlacement(puzzleString, region) {
     switch (region) {
       case 1:
-        this.checkPlacement(puzzleString, reg1);
+        this.checkPlacement(puzzleString, regs[0]);
         break;
       case 2:
-        this.checkPlacement(puzzleString, reg2);
+        this.checkPlacement(puzzleString, regs[1]);
         break;
       case 3:
-        this.checkPlacement(puzzleString, reg3);
+        this.checkPlacement(puzzleString, regs[2]);
         break;
       case 4:
-        this.checkPlacement(puzzleString, reg4);
+        this.checkPlacement(puzzleString, regs[3]);
         break;
       case 5:
-        this.checkPlacement(puzzleString, reg5);
+        this.checkPlacement(puzzleString, regs[4]);
         break;
       case 6:
-        this.checkPlacement(puzzleString, reg6);
+        this.checkPlacement(puzzleString, regs[5]);
         break;
       case 7:
-        this.checkPlacement(puzzleString, reg7);
+        this.checkPlacement(puzzleString, regs[6]);
         break;
       case 8:
-        this.checkPlacement(puzzleString, reg8);
+        this.checkPlacement(puzzleString, regs[7]);
         break;
       case 9:
-        this.checkPlacement(puzzleString, reg9);
+        this.checkPlacement(puzzleString, regs[8]);
         break;
     }
+  }
+
+  // I added
+  checkExistSameNumber(char, arr) {
+    for (let i = 0; i < arr.length; i++) {
+      if ((char === arr[i]) {
+        return true;
+      }
+    }
+    return false;
   }
 
   solve(puzzleString) {
@@ -158,8 +187,29 @@ class SudokuSolver {
 
       // Do not process more than the specified number of times to avoid infinite loops
       for (let i = 0 i < 10; i++) {
-        for (let i = 0; i < puzzleString.length; i++) {
-          if () {}
+
+        // For Debug
+        console.log(`Loop : ${i}`);
+        console.log(`------------------------------`);
+
+        // Scan in puzzleString
+        for (let j = 0; j < puzzleString.length; j++) {
+
+          // For Debug
+          console.log(`coordinate : ${coordinate[j]}`);
+          console.log(`characters : ${puzzleString[j]}`);
+          
+          if (puzzleString[j] !== '.') {
+            console.log('skipped');
+            continue;
+          } else {
+            for (let l = 1; l <= 9; l++) {
+              if (this.checkExistSameNumber(puzzleString[j], puzzleString[rows[k]])) {
+                console.log('existed');
+                break;
+              }
+            }
+          }
         }
       }
 
