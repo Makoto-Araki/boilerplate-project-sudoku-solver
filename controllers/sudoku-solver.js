@@ -1,16 +1,3 @@
-// Correspondence between puzzleString and coordinate
-const coordinate = [
-  'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9',
-  'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9',
-  'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9',
-  'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9',
-  'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9',
-  'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9',
-  'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9',
-  'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9',
-  'I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I9',
-];
-
 // Correspondence between puzzleString and row
 const rows = [
   [  0,  1,  2,  3,  4,  5,  6,  7,  8] ,
@@ -24,6 +11,15 @@ const rows = [
   [ 72, 73, 74, 75, 76, 77, 78, 79, 80] ,
 ];
 
+// Function returns the current row of the board according to input index
+function findCurrenntRow(idx) {
+  for (let i = 0; i < rows.length; i++) {
+    if (rows[i].indexOf(idx) !== -1)
+      return i;
+  }
+  return -1;
+};
+
 // Correspondence between puzzleString and col
 const cols = [
   [  0,  9, 18, 27, 36, 45, 54, 63, 72] ,
@@ -36,6 +32,15 @@ const cols = [
   [  7, 16, 25, 34, 43, 52, 61, 70, 79] ,
   [  8, 17, 26, 35, 44, 53, 62, 71, 80] ,
 ];
+
+// Function returns the current col of the board according to input index
+function findCurrenntCol(idx) {
+  for (let i = 0; i < cols.length; i++) {
+    if (cols[i].indexOf(idx) !== -1)
+      return i;
+  }
+  return -1;
+};
 
 // Correspondence between puzzleString and region
 const regs = [
@@ -52,6 +57,7 @@ const regs = [
 
 class SudokuSolver {
 
+  // Invalid character and 81 characters check
   validate(puzzleString) {
     if (/[1-9\.]{81}/.test(puzzleString)) {
       return true;
@@ -60,213 +66,64 @@ class SudokuSolver {
     };
   }
 
-  // I added
-  checkPlacement(puzzleString, arr) {
-    let tmp = [];
-    for (let i = 1; i < arr.length; i++) {
-      tmp.push(puzzleString[arr[i]]);
-    }
-    tmp.sort();
-    if (tmp === ['1', '2', '3', '4', '5', '6', '7', '8', '9']) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
   checkRowPlacement(puzzleString, row) {
-    switch (row) {
-      case 1:
-        this.checkPlacement(puzzleString, rows[0]);
-        break;
-      case 2:
-        this.checkPlacement(puzzleString, rows[1]);
-        break;
-      case 3:
-        this.checkPlacement(puzzleString, rows[2]);
-        break;
-      case 4:
-        this.checkPlacement(puzzleString, rows[3]);
-        break;
-      case 5:
-        this.checkPlacement(puzzleString, rows[4]);
-        break;
-      case 6:
-        this.checkPlacement(puzzleString, rows[5]);
-        break;
-      case 7:
-        this.checkPlacement(puzzleString, rows[6]);
-        break;
-      case 8:
-        this.checkPlacement(puzzleString, rows[7]);
-        break;
-      case 9:
-        this.checkPlacement(puzzleString, rows[8]);
-        break;
-    }
+    //
   }
 
   checkColPlacement(puzzleString, column) {
-    switch (column) {
-      case 1:
-        this.checkPlacement(puzzleString, cols[0]);
-        break;
-      case 2:
-        this.checkPlacement(puzzleString, cols[1]);
-        break;
-      case 3:
-        this.checkPlacement(puzzleString, cols[2]);
-        break;
-      case 4:
-        this.checkPlacement(puzzleString, cols[3]);
-        break;
-      case 5:
-        this.checkPlacement(puzzleString, cols[4]);
-        break;
-      case 6:
-        this.checkPlacement(puzzleString, cols[5]);
-        break;
-      case 7:
-        this.checkPlacement(puzzleString, cols[6]);
-        break;
-      case 8:
-        this.checkPlacement(puzzleString, cols[7]);
-        break;
-      case 9:
-        this.checkPlacement(puzzleString, cols[8]);
-        break;
-    }
+    //
   }
 
   checkRegionPlacement(puzzleString, region) {
-    switch (region) {
-      case 1:
-        this.checkPlacement(puzzleString, regs[0]);
-        break;
-      case 2:
-        this.checkPlacement(puzzleString, regs[1]);
-        break;
-      case 3:
-        this.checkPlacement(puzzleString, regs[2]);
-        break;
-      case 4:
-        this.checkPlacement(puzzleString, regs[3]);
-        break;
-      case 5:
-        this.checkPlacement(puzzleString, regs[4]);
-        break;
-      case 6:
-        this.checkPlacement(puzzleString, regs[5]);
-        break;
-      case 7:
-        this.checkPlacement(puzzleString, regs[6]);
-        break;
-      case 8:
-        this.checkPlacement(puzzleString, regs[7]);
-        break;
-      case 9:
-        this.checkPlacement(puzzleString, regs[8]);
-        break;
-    }
+    //
   }
 
-  // I added
-  checkExistSameNumber(char, arr) {
-    for (let i = 0; i < arr.length; i++) {
-      if ((char === arr[i]) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  // I added
-  searchRowPosition(num) {
-    for (let i = 0; i < rows.length; i++) {
-      if (num in rows[i]) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  // I added
-  searchColPosition(num) {
-    for (let i = 0; i < cols.length; i++) {
-      if (num in cols[i]) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  // I added
-  searchRegPosition(num) {
-    for (let i = 0; i < regs.length; i++) {
-      if (num in regs[i]) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  // Main Method for this class
+  // Puzzle Solve Method
   solve(puzzleString) {
+    let main = puzzleString;
 
-    // Check input string
-    if (!this.validate(puzzleString)) {
-      return new Error('puzzle could not be solved');
-    } else {
+    // Limit the number of puzzle solving processes to prevent infinite loops
+    for (let a = 0; a < 10; a++) {
+      console.log(`Loop ${a} start.`);
 
-      // Do not process more than the specified number of times to avoid infinite loops
-      for (let i = 0 i < 10; i++) {
+      // Do the processing within each region
+      for (let b = 0; b < regs.length; b++) {
+        console.log(`Region ${b} start.`)
 
-        // For Debug
-        console.log(`Loop : ${i}`);
-        console.log(`------------------------------`);
+        // Find available digits in each region
+        let arr1 = [];
+        let arr2 = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        let arr3 = [];
+        for (let c = 0; c < regs[b].length; c++)
+          if (main[regs[b][c]] !== '.')
+            arr1.push(main[regs[b][c]]);
+        for (let d = 0; d < arr2.length; l++)
+          if (arr1.indexOf(arr2[d]) === -1)
+            arr3.push(arr2[d]);
 
-        // Scanning in puzzleString
-        for (let j = 0; j < puzzleString.length; j++) {
-
-          // For Debug
-          console.log(`coordinate : ${coordinate[j]}`);
+        // Output available numbers in region
+        console.log(`available numbers in region ${b}`);
+        console.log(`numbers : ${arr3}`);
+        
+        // Verify how many places each number can be applied in region
+        for (let e = 0; e < arr3.length; e++) {
+          console.log(`Number ${arr3[e]} start.`);
           
-          if (puzzleString[j] !== '.') {
-            continue;
-          } else {
-
-            //　Check if which numbers are applicable
-            for (let k = 1; k <=9; k++) {
-
-              // For Debug
-              console.log(`Check if ${k} is applicable in ${coordinate[j]}`);
-
-              // Determining the search range
-              let tmp1 = this.searchRowPosition(j);
-              let tmp2 = this.searchColPosition(j);
-              let tmp3 = this.searchRegPosition(j);
-
-              // Error check
-              if (tmp1 === -1 || tmp2 === -1 || tmp3 === -1) {
-                return new Error('puzzle could not be solved');
-              }
-
-              // Basic check
-              if (this.checkExistSameNumber(puzzleString[j], puzzleString[rows[tmp1]]) ||
-                  this.checkExistSameNumber(puzzleString[j], puzzleString[cols[tmp2]]) ||
-                  this.checkExistSameNumber(puzzleString[j], puzzleString[regs[tmp3]])) {
-                continue;
-              }
+          let places = 0;
+          for (let f = 0; f < regs[b].length; f++) {
+            if (main[regs[b][f]] === '.') {
+              let tmp1 = findCurrenntRow(regs[b][f]);
+              let tmp2 = findCurrenntCol(regs[b][f]);
             }
-            
           }
+          
+          console.log(`Number ${arr3[e]} end.`);
         }
         
-        // For Debug
-        console.log(`------------------------------`);
+        console.log(`Region ${b} end.`);
       }
 
-      return new Error('puzzle could not be solved');
+      console.log(`Loop ${a} end.`)
     }
   }
 }
