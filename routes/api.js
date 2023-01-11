@@ -9,6 +9,15 @@ module.exports = function (app) {
   app.route('/api/check')
     .post((req, res) => {
 
+      // For Debug
+      console.log('CHECK');
+      console.dir(req.body);
+      
+    });
+    
+  app.route('/api/solve')
+    .post((req, res) => {
+
       // Required field check
       if (!req.body.hasOwnProperty('puzzle')) {
         return res.json({ error: 'Required field missing' });
@@ -28,24 +37,16 @@ module.exports = function (app) {
       result = solver.solve(req.body.puzzle);
 
       // Puzzle result is returned
+      /*
       if (!result) {
         return res.json({ error: 'Puzzle cannot be solved' });
       } else {
         return res.json({ solution: result })
       }
-      
+      */
+
       // For Debug
-      // console.log('CHECK');
-      // console.dir(req.body);
-      
-    });
-    
-  app.route('/api/solve')
-    .post((req, res) => {
-      
-      // For Debug
-      console.log('SOLVE');
-      console.dir(req.body);
+      console.log(result);
       
     });
 };

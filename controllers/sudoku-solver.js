@@ -86,34 +86,45 @@ class SudokuSolver {
     for (let a = 0; a < 10; a++) {
       console.log(`Loop ${a} start.`);
 
-      // Do the processing within each region
+      // Processing within each region
       for (let b = 0; b < regs.length; b++) {
         console.log(`Region ${b} start.`)
 
-        // Find available digits in each region
+        // Initialize arrays
         let arr1 = [];
         let arr2 = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
         let arr3 = [];
-        for (let c = 0; c < regs[b].length; c++)
-          if (main[regs[b][c]] !== '.')
+
+        // Find existed digits in region
+        for (let c = 0; c < regs[b].length; c++) {
+          if (main[regs[b][c]] !== '.') {
             arr1.push(main[regs[b][c]]);
-        for (let d = 0; d < arr2.length; l++)
-          if (arr1.indexOf(arr2[d]) === -1)
+          }
+        }
+
+        // Find available digits in region
+        for (let d = 0; d < arr2.length; d++) {
+          if (arr1.indexOf(arr2[d]) === -1) {
             arr3.push(arr2[d]);
+          }
+        }
 
         // Output available numbers in region
-        console.log(`available numbers in region ${b}`);
-        console.log(`numbers : ${arr3}`);
+        console.log(`Numbers : ${arr3}`);
         
-        // Verify how many places each number can be applied in region
+        // Check if each number can be applied in region
         for (let e = 0; e < arr3.length; e++) {
           console.log(`Number ${arr3[e]} start.`);
-          
+
+          // Initialize how many places
           let places = 0;
+
+          // Count applicable places
           for (let f = 0; f < regs[b].length; f++) {
-            console.log(`Place ${regs[b][f]} start.`);
-            
-            if (main[regs[b][f]] === '.') {
+            console.log(`DEBUG : ${f}`);
+            if (main[regs[b][f]] !== '.') {
+              continue;
+            } else {
               let flag = true;
               let tmp1 = findCurrenntRow(regs[b][f]);
               let tmp2 = findCurrenntCol(regs[b][f]);
@@ -129,15 +140,20 @@ class SudokuSolver {
                   break;
                 }
               }
-              if (flag) places++;
+              if (flag) {
+                places++;
+                console.log(`Number ${arr3[e]} places = ${places}`);
+              }
             }
-
-            console.log(`Place ${regs[b][f]} end.`);
           }
 
-          // Execute only place where the number is applicable in region
+          // Execute if only one place exists
+          console.log(`DEBUG2 : ${places}`);
+          console.log(`DEBUG3 : ${typeof(places)}`);
           if (places === 1) {
-            //
+            console.log(`Before : ${main[regs[b][f]]}`);
+            console.log(`After  : ${arr3[e]}`);
+            main[regs[b][f]] = arr3[e];
           }
           
           console.log(`Number ${arr3[e]} end.`);
@@ -146,8 +162,10 @@ class SudokuSolver {
         console.log(`Region ${b} end.`);
       }
 
-      console.log(`Loop ${a} end.`)
+      console.log(`Loop ${a} end.`);
     }
+    
+    console.log(main);
   }
 }
 
