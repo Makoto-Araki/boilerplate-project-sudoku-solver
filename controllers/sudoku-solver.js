@@ -111,10 +111,33 @@ class SudokuSolver {
           
           let places = 0;
           for (let f = 0; f < regs[b].length; f++) {
+            console.log(`Place ${regs[b][f]} start.`);
+            
             if (main[regs[b][f]] === '.') {
+              let flag = true;
               let tmp1 = findCurrenntRow(regs[b][f]);
               let tmp2 = findCurrenntCol(regs[b][f]);
+              for (let g = 0; g < rows[tmp1].length; g++) {
+                if (main[rows[tmp1][g]] === arr3[e]) {
+                  flag = false;
+                  break;
+                }
+              }
+              for (let h = 0; h < cols[tmp2].length; h++) {
+                if (main[cols[tmp2][h]] === arr3[e]) {
+                  flag = false;
+                  break;
+                }
+              }
+              if (flag) places++;
             }
+
+            console.log(`Place ${regs[b][f]} end.`);
+          }
+
+          // Execute only place where the number is applicable in region
+          if (places === 1) {
+            //
           }
           
           console.log(`Number ${arr3[e]} end.`);
