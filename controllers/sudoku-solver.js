@@ -112,7 +112,7 @@ class SudokuSolver {
 
       /* Example values
         (result) ===
-          ..9..5.1.  // 9char
+          7.9..5.1.  // 9char
           85.4....2  // 9char
           432......  // 9char
           1...69.83  // 9char
@@ -165,31 +165,24 @@ class SudokuSolver {
           (curentReg) === 0
           (tempArray) === [ '.', '.', '.', '2', '3', '4', '5', '8', '9' ]
           (lackArray) === [ '1', '6', '7' ]
-          (voidArray) === [ 0, 1, 11 ]
+          (voidArray) === [  0 ,  1 ,  11 ]
         */
         
-        /*
+        //*
         for (let k = 0; k < lackArray.length; k++) {
-          let count = 0;
-          let position = -1;
-          for (let l = 0; l < this.regs[curentReg].length; l++) {
-            if (result[this.regs[currentReg][l]] !== '.') {
-              continue;
-            } else {
-              if (this.findData(lackArray[k], this.regs[currentReg][l], 'row') === false &&
-                  this.findData(lackArray[k], this.regs[currentReg][l], 'col') === false) {
-                count++;
-                if (count === 1) {
-                  position = this.regs[curentReg][l];
-                }
-              }
+          let count = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+          //let index = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+          for (let l = 0; l < voidArray.length; l++) {
+            if (this.findData(lackArray[k], voidArray[l], 'row') === false &&
+                this.findData(lackArray[k], voidArray[l], 'col') === false) {
+              count[lackArray[k].parseInt() - 1]++;
+              //index[lackArray[k].parseInt() - 1] = voidArray[l];
             }
           }
-          if (count === 1) {
-            result[this.regs[curentReg][position]] = lackArray[k];
-          }
+          console.log(`AAA : ${count}`);
+          //console.log(`BBB : ${index}`);
         }
-        */
+        //*/
       }
       
     }
