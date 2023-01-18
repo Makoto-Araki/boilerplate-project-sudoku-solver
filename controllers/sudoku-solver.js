@@ -147,10 +147,17 @@ class SudokuSolver {
         let curentReg = j;
         let tempArray = regArray[i].sort();
         let lackArray = [];
+        let voidArray = [];
 
         for (let k = 1; k <= 9; k++) {
           if (tempArray.indexOf(k.toString()) === -1) {
             lackArray.push(k.toString());
+          }
+        }
+
+        for (let k = 0; k < this.regs[curentReg].length; k++) {
+          if (result[this.regs[curentReg][k]] === '.') {
+            voidArray.push(this.regs[curentReg][k]);
           }
         }
         
@@ -158,6 +165,7 @@ class SudokuSolver {
           (curentReg) === 0
           (tempArray) === [ '.', '.', '.', '2', '3', '4', '5', '8', '9' ]
           (lackArray) === [ '1', '6', '7' ]
+          (voidArray) === [ 0, 1, 11 ]
         */
         
         /*
