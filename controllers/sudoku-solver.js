@@ -107,19 +107,20 @@ class SudokuSolver {
   // Puzzle Solve Method
   solve(puzzleString) {
     let result = puzzleString;
-    console.log(`BEFORE : ${result}`);
+    //console.log(`BEFORE : ${result}`);
     for (let i = 0; i < this.maxLoop; i++) {
 
-      /* (Example result value)
-        ..9..5.1.  (9char)
-        85.4....2  (9char)
-        432......  (9char)
-        1...69.83  (9char)
-        .9.....6.  (9char)
-        62.71...9  (9char)
-        ......194  (9char)
-        5....4.37  (9char)
-        .4.3..6..  (9char)
+      /* Example values
+        (result) ===
+          ..9..5.1.  // 9char
+          85.4....2  // 9char
+          432......  // 9char
+          1...69.83  // 9char
+          .9.....6.  // 9char
+          62.71...9  // 9char
+          ......194  // 9char
+          5....4.37  // 9char
+          .4.3..6..  // 9char
       */
       
       let regArray = [];
@@ -127,29 +128,39 @@ class SudokuSolver {
         regArray.push(this.extract(result, this.regs[j]))
       }
 
-      /* (Example regArray value)
-        [
-          [ '.', '.', '9', '8', '5', '.', '4', '3', '2' ],
-          [ '.', '.', '5', '4', '.', '.', '.', '.', '.' ],
-          [ '.', '1', '.', '.', '.', '2', '.', '.', '.' ],
-          [ '1', '.', '.', '.', '9', '.', '6', '2', '.' ],
-          [ '.', '6', '9', '.', '.', '.', '7', '1', '.' ],
-          [ '.', '8', '3', '.', '6', '.', '.', '.', '9' ],
-          [ '.', '.', '.', '5', '.', '.', '.', '4', '.' ],
-          [ '.', '.', '.', '.', '.', '4', '3', '.', '.' ],
-          [ '1', '9', '4', '.', '3', '7', '6', '.', '.' ]
-        ]
+      /* Example values
+        (regArray) ===
+          [
+            [ '.', '.', '9', '8', '5', '.', '4', '3', '2' ],
+            [ '.', '.', '5', '4', '.', '.', '.', '.', '.' ],
+            [ '.', '1', '.', '.', '.', '2', '.', '.', '.' ],
+            [ '1', '.', '.', '.', '9', '.', '6', '2', '.' ],
+            [ '.', '6', '9', '.', '.', '.', '7', '1', '.' ],
+            [ '.', '8', '3', '.', '6', '.', '.', '.', '9' ],
+            [ '.', '.', '.', '5', '.', '.', '.', '4', '.' ],
+            [ '.', '.', '.', '.', '.', '4', '3', '.', '.' ],
+            [ '1', '9', '4', '.', '3', '7', '6', '.', '.' ],
+          ]
       */
 
       for (let j = 0; j < regArray.length; j++) {
         let curentReg = j;
         let tempArray = regArray[i].sort();
         let lackArray = [];
+
         for (let k = 1; k <= 9; k++) {
           if (tempArray.indexOf(k.toString()) === -1) {
             lackArray.push(k.toString());
           }
         }
+        
+        /* Example values
+          (curentReg) === 0
+          (tempArray) === [ '.', '.', '.', '2', '3', '4', '5', '8', '9' ]
+          (lackArray) === [ '1', '6', '7' ]
+        */
+        
+        /*
         for (let k = 0; k < lackArray.length; k++) {
           let count = 0;
           let position = -1;
@@ -170,6 +181,7 @@ class SudokuSolver {
             result[this.regs[curentReg][position]] = lackArray[k];
           }
         }
+        */
       }
       
     }
