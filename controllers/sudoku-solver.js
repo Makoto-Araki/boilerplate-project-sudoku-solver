@@ -69,36 +69,44 @@ class SudokuSolver {
     return result;
   }
 
-  // Find data according to row or col
-  findData(val, pos, direction) {
+  // Find data according to row
+  findDataRow(arr, pos, val) {
     let curent = -1;
     let result = false;
-    if (direction === 'row') {
-      for (let i = 0; i < this.rows.length; i++) {
-        if (this.rows[i].indexOf(pos) !== -1) {
-          curent = i;
-          break;
-        }
-      }
-      for (let i = 0; i < this.rows[curent].length; i++) {
-        if (this.rows[curent][i] === val) {
-          result = true;
-          break;
-        }
+    for (let i = 0; i < this.rows.length; i++) {
+      console.log(`CCC : ${this.rows[i]}`);
+      console.log(`DDD : ${pos}`);
+      console.log(`EEE : ${val}`);
+      if (this.rows[i].indexOf(pos) !== -1) {
+        curent = i;
+        break;
       }
     }
-    if (direction === 'col') {
-      for (let i = 0; i < this.cols.length; i++) {
-        if (this.cols[i].indexOf(pos) !== -1) {
-          curent = i;
-          break;
-        }
+    console.log(`FFF : ${curent}`);
+    for (let i = 0; i < this.rows[curent].length; i++) {
+      console.log(`GGG : ${arr[this.rows[curent]]}`);
+      if (arr[this.rows[curent][i]] === val) {
+        result = true;
+        break;
       }
-      for (let i = 0; i < this.cols[curent].length; i++) {
-        if (this.cols[curent][i] === val) {
-          result = true;
-          break;
-        }
+    }
+    return result;
+  }
+  
+  // Find data according to col
+  findDataCol(arr, pos, val) {
+    let curent = -1;
+    let result = false;
+    for (let i = 0; i < this.cols.length; i++) {
+      if (this.cols[i].indexOf(pos) !== -1) {
+        curent = i;
+        break;
+      }
+    }
+    for (let i = 0; i < this.cols[curent].length; i++) {
+      if (arr[this.cols[curent][i]] === val) {
+        result = true;
+        break;
       }
     }
     return result;
@@ -106,48 +114,52 @@ class SudokuSolver {
   
   // Puzzle Solve Method
   solve(puzzleString) {
-    let result = puzzleString;
-    //console.log(`BEFORE : ${result}`);
     for (let i = 0; i < this.maxLoop; i++) {
 
-      /* Example values
-        (result) ===
-          7.9..5.1.  // 9char
-          85.4....2  // 9char
-          432......  // 9char
-          1...69.83  // 9char
-          .9.....6.  // 9char
-          62.71...9  // 9char
-          ......194  // 9char
-          5....4.37  // 9char
-          .4.3..6..  // 9char
+      /* Example
+        result =>
+          7.9..5.1.  // 9chars
+          85.4....2  // 9chars
+          432......  // 9chars
+          1...69.83  // 9chars
+          .9.....6.  // 9chars
+          62.71...9  // 9chars
+          ......194  // 9chars
+          5....4.37  // 9chars
+          .4.3..6..  // 9chars
       */
       
       let regArray = [];
       for (let j = 0; j < this.regs.length; j++) {
-        regArray.push(this.extract(result, this.regs[j]))
+        regArray.push(this.extract(puzzleString, this.regs[j]))
       }
 
-      /* Example values
-        (regArray) ===
+      /* Example
+        regArray =>
           [
-            [ '.', '.', '9', '8', '5', '.', '4', '3', '2' ],
-            [ '.', '.', '5', '4', '.', '.', '.', '.', '.' ],
-            [ '.', '1', '.', '.', '.', '2', '.', '.', '.' ],
-            [ '1', '.', '.', '.', '9', '.', '6', '2', '.' ],
-            [ '.', '6', '9', '.', '.', '.', '7', '1', '.' ],
-            [ '.', '8', '3', '.', '6', '.', '.', '.', '9' ],
-            [ '.', '.', '.', '5', '.', '.', '.', '4', '.' ],
-            [ '.', '.', '.', '.', '.', '4', '3', '.', '.' ],
-            [ '1', '9', '4', '.', '3', '7', '6', '.', '.' ],
+            [ '.', '.', '9', '8', '5', '.', '4', '3', '2' ],  => tempArray[0]
+            [ '.', '.', '5', '4', '.', '.', '.', '.', '.' ],  => tempArray[1]
+            [ '.', '1', '.', '.', '.', '2', '.', '.', '.' ],  => tempArray[2]
+            [ '1', '.', '.', '.', '9', '.', '6', '2', '.' ],  => tempArray[3]
+            [ '.', '6', '9', '.', '.', '.', '7', '1', '.' ],  => tempArray[4]
+            [ '.', '8', '3', '.', '6', '.', '.', '.', '9' ],  => tempArray[5]
+            [ '.', '.', '.', '5', '.', '.', '.', '4', '.' ],  => tempArray[6]
+            [ '.', '.', '.', '.', '.', '4', '3', '.', '.' ],  => tempArray[7]
+            [ '1', '9', '4', '.', '3', '7', '6', '.', '.' ],  => tempArray[8]
           ]
       */
 
       for (let j = 0; j < regArray.length; j++) {
         let curentReg = j;
         let tempArray = regArray[i].sort();
-        let lackArray = [];
         let voidArray = [];
+        let lackArray = [];
+
+        for (let k = 0; k < this.regs[curentReg].length; k++) {
+          if (result[this.regs[curentReg][k]] === '.') {
+            voidArray.push(this.regs[curentReg][k]);
+          }
+        }
 
         for (let k = 1; k <= 9; k++) {
           if (tempArray.indexOf(k.toString()) === -1) {
@@ -155,32 +167,35 @@ class SudokuSolver {
           }
         }
 
-        for (let k = 0; k < this.regs[curentReg].length; k++) {
-          if (result[this.regs[curentReg][k]] === '.') {
-            voidArray.push(this.regs[curentReg][k]);
-          }
-        }
-        
-        /* Example values
-          (curentReg) === 0
-          (tempArray) === [ '.', '.', '.', '2', '3', '4', '5', '8', '9' ]
-          (lackArray) === [ '1', '6', '7' ]
-          (voidArray) === [  0 ,  1 ,  11 ]
+        /* Example
+          curentReg => 0
+          tempArray => [ '.', '.', '.', '2', '3', '4', '5', '8', '9' ]
+          voidArray => [  0 ,  1 ,  11 ]
+          lackArray => [ '1', '6', '7' ]
         */
         
         //*
-        for (let k = 0; k < lackArray.length; k++) {
-          let count = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
-          //let index = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
-          for (let l = 0; l < voidArray.length; l++) {
-            if (this.findData(lackArray[k], voidArray[l], 'row') === false &&
-                this.findData(lackArray[k], voidArray[l], 'col') === false) {
-              count[lackArray[k].parseInt() - 1]++;
-              //index[lackArray[k].parseInt() - 1] = voidArray[l];
+        for (let k = 0; k < voidArray.length; k++) {
+          let sum = 0;
+          let idx = [];
+          let val = '';
+          for (let l = 0; l < lackArray.length; l++) {
+            console.log(`AAA : ${voidArray[k]}`);
+            console.log(`BBB : ${lackArray[l]}`);
+            //console.log(`EEE : ${this.findDataRow(voidArray[k], lackArray[l])}`);
+            //console.log(`FFF : ${this.findDataCol(voidArray[k], lackArray[l])}`);
+            if (this.findDataRow(result, voidArray[k], lackArray[l]) === false &&
+                this.findDataCol(result, voidArray[k], lackArray[l]) === false) {
+              sum = sum + 1;
+              idx.push(voidArray[k]);
+              val = lackArray[l];
             }
           }
-          console.log(`AAA : ${count}`);
-          //console.log(`BBB : ${index}`);
+          //console.log(`SUM : ${sum}`);
+          if (sum === 1) {
+            result[idx[0]] = val;
+            //console.log(`AAA : ${result}`);
+          }
         }
         //*/
       }
