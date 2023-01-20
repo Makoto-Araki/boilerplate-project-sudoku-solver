@@ -184,9 +184,9 @@ class SudokuSolver {
           let tmp2 = -1;
           let flg1 = false;
           let flg2 = false;
-          let sum = 0;
-          let idx = [];
-          let val = '';
+          let count = 0;
+          let index = [];
+          let value = [];
 
           // lackArray => [ '1', '6', '7' ]
           for (let l = 0; l < lackArray.length; l++) {
@@ -203,52 +203,57 @@ class SudokuSolver {
               this.rows[8] => [ 72, 73, 74, 75, 76, 77, 78, 79, 80 ]
             */
 
-            // voidArray[0] => 0(tmp1)
             for (let m = 0; m < this.rows.length; m++) {
               if (this.rows[m].indexOf(voidArray[k]) !== -1) {
                 tmp1 = m;
-                break;
               }
             }
 
-            // puzzle
-            for (let m = 0; m )
-            if (puzzleString[this.rows[tmp1].indexOf(lackArray[l])) {
-              flg1 = true;
+            for (let m = 0; m < this.rows[tmp1].length; m++) {
+              if (puzzleString[this.rows[tmp1][m]] === lackArray[l]) {
+                flg1 = true;
+              }
             }
+
+            /*
+              this.cols[0] => [  0,  9, 18, 27, 36, 45, 54, 63, 72 ]
+              this.cols[1] => [  1, 10, 19, 28, 37, 46, 55, 64, 73 ]
+              this.cols[2] => [  2, 11, 20, 29, 38, 47, 56, 65, 74 ]
+              this.cols[3] => [  3, 12, 21, 30, 39, 48, 57, 66, 75 ]
+              this.cols[4] => [  4, 13, 22, 31, 40, 49, 58, 67, 76 ]
+              this.cols[5] => [  5, 14, 23, 32, 41, 50, 59, 68, 77 ]
+              this.cols[6] => [  6, 15, 24, 33, 42, 51, 60, 69, 78 ]
+              this.cols[7] => [  7, 16, 25, 34, 43, 52, 61, 70, 79 ]
+              this.cols[8] => [  8, 17, 26, 35, 44, 53, 62, 71, 80 ]
+            */
 
             for (let m = 0; m < this.cols.length; m++) {
               if (this.cols[m].indexOf(voidArray[k]) !== -1) {
                 tmp2 = m;
-                break;
-              }
-            }
-            for (let m = 0; m < this.cols[tmp2].length; i++) {
-              if (puzzleString[this.cols[tmp2][m]] === lackArray[l]) {
-                flg2 = true;
-                break;
               }
             }
 
-            console.log(`>> B01 : ${voidArray[k]}`);
-            console.log(`>> B02 : ${lackArray[l]}`);
-            console.log(`>> B03 : ${flg1}`);
-            console.log(`>> B04 : ${flg2}`);
-            
-            if (flg1 === false && flg2 === false) {
-              console.log(`>>>> C01 : ${sum}`);
-              console.log(`>>>> C02 : ${idx}`);
-              sum = sum + 1;
-              idx.push(voidArray[k]);
-              val = lackArray[l];
+            for (let m = 0; m < this.cols[tmp2].length; m++) {
+              if (puzzleString[this.cols[tmp2][m]] === lackArray[l]) {
+                flg2 = true;
+              }
             }
+
+            if (flg1 === false && flg2 === false) {
+              count = count + 1;
+              index.push(voidArray[k]);
+              value.push(lackArray[l]);
+            }
+            
+            console.log(`A01 : ${count}`);
           }
-          //console.log(`SUM : ${sum}`);
-          if (sum === 1) {
-            puzzleString[idx[0]] = val;
-            //console.log(`AAA : ${result}`);
+          
+          if (count === 1) {
+            puzzleString[index[0]] = value[0];
           }
         }
+        
+        console.log(`A02 : ${puzzleString}`);
       }
       
     }
