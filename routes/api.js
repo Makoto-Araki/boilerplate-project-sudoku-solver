@@ -34,19 +34,19 @@ module.exports = function (app) {
       }
 
       // Puzzle solve
-      result = solver.solve(req.body.puzzle);
+      let result = solver.solve(req.body.puzzle);
 
       // Puzzle result is returned
-      /*
+      //*
       if (!result) {
         return res.json({ error: 'Puzzle cannot be solved' });
       } else {
         return res.json({ solution: result })
       }
-      */
+      //*/
 
       // For Debug
-      console.log(result);
+      //console.log(result);
       
     });
 };

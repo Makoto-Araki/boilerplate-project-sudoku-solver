@@ -105,46 +105,31 @@ class SudokuSolver {
   // Puzzle Solve Method
   solve(puzzleString) {
     this.strs = puzzleString;
-    for (let i = 0; i < 1; i++) {
-      console.log(`DEBUG : ${this.strs}`);
+    for (let i = 0; i < 10; i++) {
       let arr = [];
       for (let j = 0; j < 81; j++) {
         let tmp = [];
         arr.push(tmp);
       }
-      //console.log(`DEBUG : ${arr}`);
-      //console.log(`DEBUG : ${arr.length}`);
       for (let j = 0; j < this.strs.length; j++) {
         if (this.strs[j] === '.') {
-          //console.log(`DEBUG : index ${j} is going to process`);
           for (let k = 1; k <= 9; k++) {
-            //console.log(`DEBUG : ${this.checkRow(j, k.toString())}`);
-            //console.log(`DEBUG : ${this.checkCol(j, k.toString())}`);
-            //console.log(`DEBUG : ${this.checkReg(j, k.toString())}`);
             if (this.checkRow(j, k.toString()) === false &&
                 this.checkCol(j, k.toString()) === false &&
                 this.checkReg(j, k.toString()) === false) {
               arr[j].push(k.toString());
-              //console.log(`DEBUG : ${arr[j]}`);
             }
           }
         }
       }
-      //console.log(`DEBUG : ${arr}`);
       for (let j = 0; j < 81; j++) {
-        //console.log(`DEBUG : ${j}`);
-        //console.log(`DEBUG => ${arr[j]}`);
-        //console.log(`DEBUG => ${arr[j].length}`);
         if (arr[j].length === 1) {
-          console.log(`DEBUG : ${j}`);
-          //console.log(`DEBUG : ${arr[j][0]}`);
-          console.log(`DEBUG > ${this.strs[j]}`);
-          console.log(`DEBUG > ${arr[j][0]}`);
-          //this.strs[j] = arr[j][0]; // bug
+          this.strs = this.strs.substring(0, j) + arr[j][0] + this.strs.substring(j+1);
         }
       }
-      console.log(`DEBUG : ${this.strs}`);
+      //console.log(`DEBUG : ${this.strs}`);
     }
+    return this.strs;
   }
   
 }
