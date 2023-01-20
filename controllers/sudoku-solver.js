@@ -3,6 +3,7 @@ class SudokuSolver {
 
   // Costructor
   constructor() {
+    this.strs = '';
     this.rows = [
       [  0,  1,  2,  3,  4,  5,  6,  7,  8] ,
       [  9, 10, 11, 12, 13, 14, 15, 16, 17] ,
@@ -57,29 +58,86 @@ class SudokuSolver {
       }
     }
     for (let i = 0; i < this.rows[tmp].length; i++) {
-      if (puzzleString)
+      if (this.strs[this.rows[tmp][i]] === val) {
+        result = true;
+        break;
+      }
     }
+    return result;
   }
 
-  checkCol(val) {
-    //
+  checkCol(idx, val) {
+    let tmp = -1;
+    let result = false;
+    for (let i = 0; i < this.cols.length; i++) {
+      if (this.cols[i].indexOf(idx) !== -1) {
+        tmp = i;
+        break;
+      }
+    }
+    for (let i = 0; i < this.cols[tmp].length; i++) {
+      if (this.strs[this.cols[tmp][i]] === val) {
+        result = true;
+        break;
+      }
+    }
+    return result;
   }
 
-  checkReg(val) {
-    //
+  checkReg(idx, val) {
+    let tmp = -1;
+    let result = false;
+    for (let i = 0; i < this.regs.length; i++) {
+      if (this.regs[i].indexOf(idx) !== -1) {
+        tmp = i;
+        break;
+      }
+    }
+    for (let i = 0; i < this.regs[tmp].length; i++) {
+      if (this.strs[this.regs[tmp][i]] === val) {
+        result = true;
+        break;
+      }
+    }
+    return result;
   }
 
   // Puzzle Solve Method
   solve(puzzleString) {
-    for (let i = 0; i < 1; i++) {
+    this.strs = puzzleString;
+    for (let i = 0; i < 5; i++) {
+      //console.log(`DEBUG : ${i} loop`);
       let arr = [];
-      for (let j = 0; j < 81; j++)
-        arr.push([]);
-      for (let j = 0; j < puzzleString.length; j++) {
-        if (puzzleString[j] === '.') {
-          // 
+      for (let j = 0; j < 81; j++) {
+        let tmp = [];
+        arr.push(tmp);
+      }
+      //console.log(`DEBUG : ${arr}`);
+      //console.log(`DEBUG : ${arr.length}`);
+      for (let j = 0; j < this.strs.length; j++) {
+        if (this.strs[j] === '.') {
+          //console.log(`DEBUG : index ${j} is going to process`);
+          for (let k = 1; k <= 9; k++) {
+            //console.log(`DEBUG : ${this.checkRow(j, k.toString())}`);
+            //console.log(`DEBUG : ${this.checkCol(j, k.toString())}`);
+            //console.log(`DEBUG : ${this.checkReg(j, k.toString())}`);
+            if (this.checkRow(j, k.toString()) === false &&
+                this.checkCol(j, k.toString()) === false &&
+                this.checkReg(j, k.toString()) === false) {
+              arr[j].push(k.toString());
+            }
+          }
         }
       }
+      //console.log(`DEBUG : ${arr}`);
+      for (let j = 0; j < 81; j++) {
+        console.log(`DEBUG : ${j}`);
+        console.log(`DEBUG : ${arr[j]}`);
+        if (arr[j].length === 1) {
+          this.strs[j] = arr[j][0];
+        }
+      }
+      //console.log(`DEBUG : ${this.strs}`);
     }
   }
   
