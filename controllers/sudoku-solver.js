@@ -120,7 +120,7 @@ class SudokuSolver {
   solve(puzzleString) {
     for (let i = 0; i < this.maxLoop; i++) {
 
-      /* Example
+      /*
         puzzleString =>
           7.9..5.1.  // 9chars
           85.4....2  // 9chars
@@ -138,7 +138,7 @@ class SudokuSolver {
         regArray.push(this.extract(puzzleString, this.regs[j]))
       }
 
-      /* Example
+      /*
         regArray =>
           [
             [ '.', '.', '9', '8', '5', '.', '4', '3', '2' ],  => tempArray[0]
@@ -154,7 +154,6 @@ class SudokuSolver {
       */
 
       for (let j = 0; j < regArray.length; j++) {
-        console.log(`A01 : ${regArray[i]}`);
         let curentReg = j;
         let tempArray = regArray[i];
         let voidArray = [];
@@ -172,18 +171,14 @@ class SudokuSolver {
           }
         }
 
-        console.log(`A02 : ${curentReg}`);
-        console.log(`A03 : ${tempArray}`);
-        console.log(`A04 : ${voidArray}`);
-        console.log(`A05 : ${lackArray}`);
-
-        /* Example
+        /*
           curentReg => 0
           tempArray => [ '.', '.', '9', '8', '5', '.', '4', '3', '2' ]
           voidArray => [  0 ,  1 ,  11 ]
           lackArray => [ '1', '6', '7' ]
         */
-        
+
+        // voidArray => [  0 ,  1 ,  11 ]
         for (let k = 0; k < voidArray.length; k++) {
           let tmp1 = -1;
           let tmp2 = -1;
@@ -193,26 +188,33 @@ class SudokuSolver {
           let idx = [];
           let val = '';
 
-          console.log(`B01 : ${tmp1}`);
-          console.log(`B02 : ${tmp2}`);
-          
+          // lackArray => [ '1', '6', '7' ]
           for (let l = 0; l < lackArray.length; l++) {
-            console.log(`C01 : Process is here.`);
 
+            /*
+              this.rows[0] => [  0,  1,  2,  3,  4,  5,  6,  7,  8 ]
+              this.rows[1] => [  9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+              this.rows[2] => [ 18, 19, 20, 21, 22, 23, 24, 25, 26 ]
+              this.rows[3] => [ 27, 28, 29, 30, 31, 32, 33, 34, 35 ]
+              this.rows[4] => [ 36, 37, 38, 39, 40, 41, 42, 43, 44 ]
+              this.rows[5] => [ 45, 46, 47, 48, 49, 50, 51, 52, 53 ]
+              this.rows[6] => [ 54, 55, 56, 57, 58, 59, 60, 61, 62 ]
+              this.rows[7] => [ 63, 64, 65, 66, 67, 68, 69, 70, 71 ]
+              this.rows[8] => [ 72, 73, 74, 75, 76, 77, 78, 79, 80 ]
+            */
+
+            // voidArray[0] => 0(tmp1)
             for (let m = 0; m < this.rows.length; m++) {
-              console.log(`D01 : ${this.rows[m]}`);
-              console.log(`D02 : ${voidArray[k]}`);
               if (this.rows[m].indexOf(voidArray[k]) !== -1) {
                 tmp1 = m;
                 break;
               }
-              console.log(`D03 : ${tmp1}`);
             }
-            for (let m = 0; m < this.rows[tmp1].length; i++) {
-              if (puzzleString[this.rows[tmp1][m]] === lackArray[l]) {
-                flg1 = true;
-                break;
-              }
+
+            // puzzle
+            for (let m = 0; m )
+            if (puzzleString[this.rows[tmp1].indexOf(lackArray[l])) {
+              flg1 = true;
             }
 
             for (let m = 0; m < this.cols.length; m++) {
