@@ -48,8 +48,17 @@ class SudokuSolver {
     };
   }
 
+  // Invalid row check
+  checkRow(puzzleString) {
+    for (let i = 0; i < this.rows.length; i++) {
+      for (let j = 1; j <= 9; j++) {
+        //
+      }
+    }
+  }
+
   // Sub Method
-  checkRow(idx, val) {
+  searchRow(idx, val) {
     let tmp = -1;
     let result = false;
     for (let i = 0; i < this.rows.length; i++) {
@@ -68,7 +77,7 @@ class SudokuSolver {
   }
 
   // Sub Method
-  checkCol(idx, val) {
+  searchCol(idx, val) {
     let tmp = -1;
     let result = false;
     for (let i = 0; i < this.cols.length; i++) {
@@ -87,7 +96,7 @@ class SudokuSolver {
   }
 
   // Sub Method
-  checkReg(idx, val) {
+  searchReg(idx, val) {
     let tmp = -1;
     let result = false;
     for (let i = 0; i < this.regs.length; i++) {
@@ -141,9 +150,9 @@ class SudokuSolver {
     }
     let idx = char1 * 9 + (char2 - 1);
     let result = [ false, false, false ];
-    result[0] = this.checkRow(idx, value);
-    result[1] = this.checkCol(idx, value);
-    result[2] = this.checkReg(idx, value);
+    result[0] = this.searchRow(idx, value);
+    result[1] = this.searchCol(idx, value);
+    result[2] = this.searchReg(idx, value);
     return result;
   }
   
@@ -159,9 +168,9 @@ class SudokuSolver {
       for (let j = 0; j < this.strs.length; j++) {
         if (this.strs[j] === '.') {
           for (let k = 1; k <= 9; k++) {
-            if (this.checkRow(j, k.toString()) === false &&
-                this.checkCol(j, k.toString()) === false &&
-                this.checkReg(j, k.toString()) === false) {
+            if (this.searchRow(j, k.toString()) === false &&
+                this.searchCol(j, k.toString()) === false &&
+                this.searchReg(j, k.toString()) === false) {
               arr[j].push(k.toString());
             }
           }
