@@ -9,15 +9,33 @@ module.exports = function (app) {
   app.route('/api/check')
     .post((req, res) => {
 
-      // Check replacement
-      //let result = solver.check(req.body.puzzle, req.body.coordinate. req.body.value);
-      
-      // For Debug
-      console.log('CHECK');
-      console.log(`AAA : ${req.body.puzzle}`);
-      console.log(`BBB : ${req.body.coordinate}`);
-      console.log(`CCC : ${req.body.value}`);
-      
+      // Initialize and replacement check
+      let arr1 = [];
+      let obj1 = { valid: true };
+      let result = solver.check(req.body.puzzle, req.body.coordinate, req.body.value);
+
+      if (result[0] === true || result[1] === true || result[2] === true) {
+        obj1.valid = false;
+      }
+
+      if (result[0] === true) {
+        arr1.push('row');
+      }
+
+      if (result[1] === true) {
+        arr1.push('column');
+      }
+
+      if (result[2] === true) {
+        arr1.push('region');
+      }
+
+      if (arr1.length !== 0) {
+        obj1.conflict = arr1;
+      }
+
+      // Result is going to be returned
+      return res.json(obj1);
     });
     
   app.route('/api/solve')

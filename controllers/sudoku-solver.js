@@ -140,12 +140,11 @@ class SudokuSolver {
         break;
     }
     let idx = char1 * 9 + (char2 - 1);
-    let result1 = this.checkRow(idx, value);
-    let result2 = this.checkCol(idx, value);
-    let result3 = this.checkReg(idx, value);
-    console.log('DEBUG : ${result1}');
-    console.log('DEBUG : ${result2}');
-    console.log('DEBUG : ${result3}');
+    let result = [ false, false, false ];
+    result[0] = this.checkRow(idx, value);
+    result[1] = this.checkCol(idx, value);
+    result[2] = this.checkReg(idx, value);
+    return result;
   }
   
   // Puzzle Solve Method
