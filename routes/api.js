@@ -9,9 +9,14 @@ module.exports = function (app) {
   app.route('/api/check')
     .post((req, res) => {
 
+      // Check replacement
+      //let result = solver.check(req.body.puzzle, req.body.coordinate. req.body.value);
+      
       // For Debug
       console.log('CHECK');
-      console.dir(req.body);
+      console.log(`AAA : ${req.body.puzzle}`);
+      console.log(`BBB : ${req.body.coordinate}`);
+      console.log(`CCC : ${req.body.value}`);
       
     });
     
@@ -36,17 +41,12 @@ module.exports = function (app) {
       // Puzzle solve
       let result = solver.solve(req.body.puzzle);
 
-      // Puzzle result is returned
-      //*
+      // Result is going to be returned
       if (!result) {
         return res.json({ error: 'Puzzle cannot be solved' });
       } else {
         return res.json({ solution: result })
       }
-      //*/
-
-      // For Debug
-      //console.log(result);
       
     });
 };

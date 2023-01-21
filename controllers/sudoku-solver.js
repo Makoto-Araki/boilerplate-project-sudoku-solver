@@ -48,6 +48,7 @@ class SudokuSolver {
     };
   }
 
+  // Sub Method
   checkRow(idx, val) {
     let tmp = -1;
     let result = false;
@@ -66,6 +67,7 @@ class SudokuSolver {
     return result;
   }
 
+  // Sub Method
   checkCol(idx, val) {
     let tmp = -1;
     let result = false;
@@ -84,6 +86,7 @@ class SudokuSolver {
     return result;
   }
 
+  // Sub Method
   checkReg(idx, val) {
     let tmp = -1;
     let result = false;
@@ -102,6 +105,49 @@ class SudokuSolver {
     return result;
   }
 
+  // Replacement Check Method
+  check(puzzleString, coordinate, value) {
+    this.strs = puzzleString;
+    let char1 = coordinate[0];
+    let char2 = parseInt(coordinate[1]);
+    switch (char1) {
+      case 'A':
+        char1 = 0;
+        break;
+      case 'B':
+        char1 = 1;
+        break;
+      case 'C':
+        char1 = 2;
+        break;
+      case 'D':
+        char1 = 3;
+        break;
+      case 'E':
+        char1 = 4;
+        break;
+      case 'F':
+        char1 = 5;
+        break;
+      case 'G':
+        char1 = 6;
+        break;
+      case 'H':
+        char1 = 7;
+        break;
+      case 'I':
+        char1 = 8;
+        break;
+    }
+    let idx = char1 * 9 + (char2 - 1);
+    let result1 = this.checkRow(idx, value);
+    let result2 = this.checkCol(idx, value);
+    let result3 = this.checkReg(idx, value);
+    console.log('DEBUG : ${result1}');
+    console.log('DEBUG : ${result2}');
+    console.log('DEBUG : ${result3}');
+  }
+  
   // Puzzle Solve Method
   solve(puzzleString) {
     this.strs = puzzleString;
@@ -127,7 +173,6 @@ class SudokuSolver {
           this.strs = this.strs.substring(0, j) + arr[j][0] + this.strs.substring(j+1);
         }
       }
-      //console.log(`DEBUG : ${this.strs}`);
     }
     return this.strs;
   }
