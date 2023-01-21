@@ -48,15 +48,6 @@ class SudokuSolver {
     };
   }
 
-  // Invalid row check
-  checkRow(puzzleString) {
-    for (let i = 0; i < this.rows.length; i++) {
-      for (let j = 1; j <= 9; j++) {
-        //
-      }
-    }
-  }
-
   // Sub Method
   searchRow(idx, val) {
     let tmp = -1;

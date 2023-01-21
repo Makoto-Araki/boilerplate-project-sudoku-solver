@@ -14,14 +14,42 @@ suite('Unit Tests', () => {
   // function validate test
   suite('validate', () => {
     test('Logic handles a valid puzzle string of 81 characters', () => {
-      assert.equal(solver.validate(str1), true);
+      assert.isTrue(solver.validate(str1));
     });
     test('Logic handles a puzzle string with invalid characters', () => {
-      assert.equal(solver.validate(str2), false);
+      assert.isFalse(solver.validate(str2));
     });
     test('Logic handles a puzzle string that is not 81 characters in length', () => {
-      assert.equal(solver.validate(str3), false);
+      assert.isFalse(solver.validate(str3));
     });
   });
 
+  // function check test
+  suite('check', () => {
+    let result = [ false, false, false ];
+    test('Logic handles a valid row placement', () => {
+      assert.sameMembers(solver.check(str1, 'A1', '7'), result);
+    });
+    test('Logic handles an invalid row placement', () => {
+      assert.notSameMembers(solver.check(str1, 'A1', '1'), result);
+    });
+    test('Logic handles a valid column placement', () => {
+      assert.sameMembers(solver.check(str1, 'A1', '7'), result);
+    });
+    test('Logic handles an invalid column placement', () => {
+      assert.notSameMembers(solver.check(str1, 'A1', '6'), result);
+    });
+    test('Logic handles a valid region (3x3 grid) placement', () => {
+      assert.sameMembers(solver.check(str1, 'A1', '7'), result);
+    });
+    test('Logic handles an invalid region (3x3 grid) placement', () => {
+      assert.notSameMembers(solver.check(str1, 'A1', '2'), result);
+    });
+  });
+
+  // function solve test
+  suite('solve', () => {
+    //
+  });
+  
 });
