@@ -146,6 +146,46 @@ class SudokuSolver {
     result[2] = this.searchReg(idx, value);
     return result;
   }
+
+  // Final Check Method
+  finalCheck() {
+    let sample = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    // row check
+    for (let i = 0; i < this.rows.length; i++) {
+      let temp1 = [];
+      for (let j = 0; j < this.rows[i].length; j++) {
+        temp1.push(this.strs[j]);
+      }
+      temp1.sort();
+      if (temp1.toString() !== sample.toString()) {
+        return false;
+      }
+    }
+    // col check
+    for (let i = 0; i < this.cols.length; i++) {
+      let temp2 = [];
+      for (let j = 0; j < this.cols[i].length; j++) {
+        temp2.push(this.strs[j]);
+      }
+      temp2.sort();
+      if (temp2.toString() !== sample.toString()) {
+        return false;
+      }
+    }
+    // reg check
+    for (let i = 0; i < this.regs.length; i++) {
+      let temp3 = [];
+      for (let j = 0; j < this.regs[i].length; j++) {
+        temp3.push(this.strs[j]);
+      }
+      temp3.sort();
+      if (temp3.toString() !== sample.toString()) {
+        return false;
+      }
+    }
+    // return value
+    return true;
+  }
   
   // Puzzle Solve Method
   solve(puzzleString) {
@@ -173,7 +213,11 @@ class SudokuSolver {
         }
       }
     }
-    return this.strs;
+    if (this.finalCheck() === true) {
+      return this.strs;
+    } else {
+      return 'Puzzle cannot be solved';
+    }
   }
   
 }

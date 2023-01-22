@@ -62,6 +62,8 @@ module.exports = function (app) {
       // Result is going to be returned
       if (!result) {
         return res.json({ error: 'Puzzle cannot be solved' });
+      } else if (result === 'Puzzle cannot be solved') {
+        return res.json({ error: 'Puzzle cannot be solved' });
       } else {
         return res.json({ solution: result })
       }

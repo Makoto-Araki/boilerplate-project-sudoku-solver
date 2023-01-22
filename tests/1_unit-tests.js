@@ -8,6 +8,9 @@ const solver = new Solver();
 const str1 = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
 const str2 = '..9..5.1.85.4....2432......1...69.83.9X....6.62.71...9......1945....4.37.4.3..6..';
 const str3 = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6';
+const str4 = '769235418851496372432178956174569283395842761628713549283657194516924837947381625';
+const str5 = '8.9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+const str6 = 'Puzzle cannot be solved';
 
 suite('Unit Tests', () => {
 
@@ -26,7 +29,7 @@ suite('Unit Tests', () => {
 
   // function check test
   suite('check', () => {
-    let result = [ false, false, false ];
+    const result = [ false, false, false ];
     test('Logic handles a valid row placement', () => {
       assert.sameMembers(solver.check(str1, 'A1', '7'), result);
     });
@@ -49,7 +52,12 @@ suite('Unit Tests', () => {
 
   // function solve test
   suite('solve', () => {
-    //
+    test('Valid puzzle strings pass the solver', () => {
+      assert.equal(solver.solve(str1), str4);
+    });
+    test('Invalid puzzle strings fail the solver', () => {
+      assert.equal(solver.solve(str5), str6);
+    });
   });
   
 });
