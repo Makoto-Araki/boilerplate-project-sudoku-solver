@@ -41,7 +41,7 @@ class SudokuSolver {
   
   // Invalid character check and 81 characters check
   validate(puzzleString) {
-    if (/[1-9\.]{81}/.test(puzzleString)) {
+    if (/^[1-9\.]{81}$/.test(puzzleString)) {
       return true;
     } else {
       return false;

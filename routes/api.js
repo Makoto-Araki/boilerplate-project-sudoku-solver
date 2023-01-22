@@ -9,9 +9,38 @@ module.exports = function (app) {
   app.route('/api/check')
     .post((req, res) => {
 
-      // Initialize and replacement check
+      // Initialize
       let arr1 = [];
       let obj1 = { valid: true };
+
+      // Required field check
+      if (!req.body.hasOwnProperty('puzzle') ||
+          !req.body.hasOwnProperty('coordinate') ||
+          !req.body.hasOwnProperty('value')) {
+        return res.json({ error: 'Required field(s) missing' });
+      }
+
+      // 81 characters long check
+      if (req.body.puzzle.length !== 81) {
+        return res.json({ error: 'Expected puzzle to be 81 characters long' });
+      }
+
+      // Invalid character check in puzzle
+      if (/^[1-9\.]{81}$/.test(req.body.puzzle) !== true) {
+        return res.json({ error: 'Invalid characters in puzzle' });
+      }
+
+      // Invalid coordinate check
+      if (/^[A-I]{1}[1-9]{1}$/.test(req.body.coordinate) !== true) {
+        return res.json({ error: 'Invalid coordinate' });
+      }
+
+      // Invalid value check
+      if ((/^[1-9]{1}$/.test(req.body.value)) !== true) {
+        return res.json({ error: 'Invalid value' });
+      }
+
+      // Replacement check
       let result = solver.check(req.body.puzzle, req.body.coordinate, req.body.value);
 
       if (result[0] === true || result[1] === true || result[2] === true) {
@@ -46,14 +75,14 @@ module.exports = function (app) {
         return res.json({ error: 'Required field missing' });
       }
 
+      // 81 characters long check
+      if (req.body.puzzle.length !== 81) {
+        return res.json({ error: 'Expected puzzle to be 81 characters long' });
+      }
+
       // Invalid character check
       if (!solver.validate(req.body.puzzle)) {
         return res.json({ error: 'Invalid characters in puzzle' });
-      }
-
-      // 81 characters long check
-      if (!solver.validate(req.body.puzzle)) {
-        return res.json({ error: 'Expected puzzle to be 81 characters long' });
       }
 
       // Puzzle solve
