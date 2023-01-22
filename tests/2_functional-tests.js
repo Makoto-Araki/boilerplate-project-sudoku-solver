@@ -108,60 +108,96 @@ suite('Functional Tests', () => {
       value: '1'
     })
     .end((err, res) => {
+      assert.equal(res, undefined);
       done();
     });
   });
+  // test9
   test('Check a puzzle placement with all placement conflicts', (done) => {
     chai
     .request(server)
     .post('api/check')
-    .send({ puzzle: str1 })
+    .send({
+      puzzle: str1,
+      coordinate: 'A1',
+      value: '1'
+    })
     .end((err, res) => {
+      assert.equal(res, undefined);
       done();
     });
   });
+  // test10
   test('Check a puzzle placement with missing required fields', (done) => {
     chai
     .request(server)
     .post('api/check')
-    .send({ puzzle: str1 })
+    .send({
+      puzzle: str1,
+      coordinate: 'A1'
+    })
     .end((err, res) => {
+      assert.equal(res, undefined);
       done();
     });
   });
+  // test11
   test('Check a puzzle placement with invalid characters', (done) => {
     chai
     .request(server)
     .post('api/check')
-    .send({ puzzle: str1 })
+    .send({
+      puzzle: str1,
+      coordinate: 'A1',
+      value: 'X'
+    })
     .end((err, res) => {
+      assert.equal(res, undefined);
       done();
     });
   });
+  // test12
   test('Check a puzzle placement with incorrect length', (done) => {
     chai
     .request(server)
     .post('api/check')
-    .send({ puzzle: str1 })
+    .send({
+      puzzle: str3,
+      coordinate: 'A1',
+      value: '7'
+    })
     .end((err, res) => {
+      assert.equal(res, undefined);
       done();
     });
   });
+  // test13
   test('Check a puzzle placement with invalid placement coordinate', (done) => {
     chai
     .request(server)
     .post('api/check')
-    .send({ puzzle: str1 })
+    .send({
+      puzzle: str1,
+      coordinate: 'X1',
+      value: '7'
+    })
     .end((err, res) => {
+      assert.equal(res, undefined);
       done();
     });
   });
+  // test14
   test('Check a puzzle placement with invalid placement value', (done) => {
     chai
     .request(server)
     .post('api/check')
-    .send({ puzzle: str1 })
+    .send({
+      puzzle: str1,
+      coordinate: 'A1',
+      value: 'X'
+    })
     .end((err, res) => {
+      assert.equal(res, undefined);
       done();
     });
   });
