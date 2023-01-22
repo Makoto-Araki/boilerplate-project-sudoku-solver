@@ -140,6 +140,9 @@ class SudokuSolver {
         break;
     }
     let idx = char1 * 9 + (char2 - 1);
+    if (this.strs[idx] !== '.') {
+      this.strs = this.strs.substring(0, idx) + '.' + this.strs.substring(idx+1);
+    }
     let result = [ false, false, false ];
     result[0] = this.searchRow(idx, value);
     result[1] = this.searchCol(idx, value);
